@@ -1,0 +1,35 @@
+Employee_ID <- c(1,2,3,4,5)
+Department <- c("Sales","HR","Marketing","Sales","HR")
+Years_of_Service <- c(5,3,7,4,2)
+Performance_Score <- c(85,92,78,90,76)
+
+employee <- data.frame(Employee_ID,
+                       Department,
+                       Years_of_Service,
+                       Performance_Score)
+
+print(employee)
+plot(employee$Employee_ID,
+     employee$Performance_Score,
+     type="o",
+     col="blue",
+     pch=16,
+     xlab="Employee ID",
+     ylab="Performance Score",
+     main="Employee Performance Trend")
+
+legend("bottomright",
+       legend="Performance Score",
+       col="blue",
+       lty=1,
+       pch=16)
+plot(employee$Years_of_Service,
+     employee$Performance_Score,
+     main="Years of Service vs Performance Score",
+     xlab="Years of Service",
+     ylab="Performance Score",
+     pch=19,
+     col="red")
+
+abline(lm(Performance_Score ~ Years_of_Service, data=employee),
+       col="blue")
