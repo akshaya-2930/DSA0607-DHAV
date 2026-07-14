@@ -1,0 +1,83 @@
+Date <- c("2023-01-01",
+          "2023-01-02",
+          "2023-01-03",
+          "2023-01-04",
+          "2023-01-05")
+
+Page_Views <- c(1500,1600,1400,1650,1800)
+
+Click_Through_Rate <- c(2.3,2.7,2.0,2.4,2.6)
+
+website <- data.frame(Date,
+                      Page_Views,
+                      Click_Through_Rate)
+
+print(website)
+plot(website$Page_Views,
+     type="o",
+     col="blue",
+     xaxt="n",
+     xlab="Date",
+     ylab="Page Views",
+     main="Daily Page Views Trend")
+
+axis(1,
+     at=1:5,
+     labels=website$Date)
+
+legend("topleft",
+       legend="Page Views",
+       col="blue",
+       lty=1,
+       pch=16)
+barplot(website$Click_Through_Rate,
+        names.arg=website$Date,
+        main="Click Through Rate by Date",
+        xlab="Date",
+        ylab="CTR (%)",
+        col="orange",
+        border="black")
+Likes <- c(120,150,130,160,180)
+Shares <- c(60,70,65,75,80)
+Comments <- c(30,35,32,40,45)
+
+interaction <- rbind(Likes,
+                     Shares,
+                     Comments)
+
+x <- 1:5
+
+colors <- c("skyblue","orange","lightgreen")
+
+plot(x,
+     Likes,
+     type="n",
+     ylim=c(0,max(colSums(interaction))),
+     xlab="Date",
+     ylab="Interactions",
+     xaxt="n",
+     main="User Interactions")
+
+axis(1,
+     at=1:5,
+     labels=Date)
+
+polygon(c(x,rev(x)),
+        c(rep(0,5),rev(Likes)),
+        col=colors[1],
+        border=NA)
+
+polygon(c(x,rev(x)),
+        c(Likes,rev(Likes+Shares)),
+        col=colors[2],
+        border=NA)
+
+polygon(c(x,rev(x)),
+        c(Likes+Shares,
+          rev(Likes+Shares+Comments)),
+        col=colors[3],
+        border=NA)
+
+legend("topleft",
+       legend=c("Likes","Shares","Comments"),
+       fill=colors)
