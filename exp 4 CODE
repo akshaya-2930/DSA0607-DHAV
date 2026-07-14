@@ -1,0 +1,33 @@
+# Create the dataset
+
+Product_ID <- c(1,2,3,4,5)
+Product_Name <- c("Product A","Product B","Product C","Product D","Product E")
+Quantity_Available <- c(250,175,300,200,220)
+
+inventory <- data.frame(Product_ID,
+                        Product_Name,
+                        Quantity_Available)
+
+print(inventory)
+barplot(inventory$Quantity_Available,
+        names.arg=inventory$Product_Name,
+        main="Quantity of Products in Inventory",
+        xlab="Product Name",
+        ylab="Quantity Available",
+        col="skyblue",
+        border="black")
+inventory$Category <- c("Electronics",
+                        "Electronics",
+                        "Furniture",
+                        "Furniture",
+                        "Stationery")
+
+inventory_table <- table(inventory$Category,
+                         inventory$Product_Name)
+
+barplot(inventory_table,
+        main="Products by Category",
+        xlab="Category",
+        ylab="Number of Products",
+        col=rainbow(nrow(inventory_table)),
+        legend.text=rownames(inventory_table))
