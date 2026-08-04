@@ -1,0 +1,54 @@
+# Create Monthly Sales Dataset
+
+sales_data <- data.frame(
+  Month = factor(c("January", "February", "March", "April", "May"),
+                 levels = c("January", "February", "March", "April", "May")),
+  Sales = c(15000, 18000, 22000, 20000, 23000)
+)
+
+print(sales_data)
+
+library(ggplot2)
+
+ggplot(sales_data, aes(x = Month, y = Sales, group = 1)) +
+  geom_line(color = "blue", size = 1.2) +
+  geom_point(color = "red", size = 3) +
+  labs(
+    title = "Monthly Sales",
+    x = "Month",
+    y = "Sales ($)"
+  ) +
+  theme_minimal()
+
+product_data <- data.frame(
+  Product = c("Laptop", "Phone", "Tablet", "Monitor", "Keyboard"),
+  Sales = c(50000, 65000, 30000, 25000, 18000)
+)
+
+ggplot(product_data,
+       aes(x = reorder(Product, Sales), y = Sales)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  coord_flip() +
+  labs(
+    title = "Top Selling Products",
+    x = "Products",
+    y = "Sales ($)"
+  ) +
+  theme_minimal()
+
+scatter_data <- data.frame(
+  Month = c("January","February","March","April","May"),
+  Advertising = c(2000,3000,3500,3200,4000),
+  Sales = c(15000,18000,22000,20000,23000)
+)
+
+ggplot(scatter_data,
+       aes(x = Advertising, y = Sales)) +
+  geom_point(color = "red", size = 4) +
+  geom_smooth(method = "lm", se = FALSE, color = "blue") +
+  labs(
+    title = "Advertising Budget vs Sales",
+    x = "Advertising Budget ($)",
+    y = "Sales ($)"
+  ) +
+  theme_minimal()̥

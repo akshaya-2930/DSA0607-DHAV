@@ -1,0 +1,54 @@
+Customer_ID <- c(1,2,3,4,5)
+Age <- c(25,30,35,28,40)
+Satisfaction_Score <- c(4,5,3,4,5)
+
+customer <- data.frame(Customer_ID, Age, Satisfaction_Score)
+
+print(customer)
+hist(customer$Age,
+     main = "Distribution of Customer Ages",
+     xlab = "Age",
+     ylab = "Frequency",
+     col = "skyblue",
+     border = "black")
+scores <- table(customer$Satisfaction_Score)
+
+pie(scores,
+    main = "Customer Satisfaction Scores",
+    col = rainbow(length(scores)),
+    labels = names(scores))
+customer$Age_Group <- cut(customer$Age,
+                          breaks = c(20,30,40,50),
+                          labels = c("21-30","31-40","41-50"),
+                          include.lowest = TRUE)
+
+age_table <- table(customer$Age_Group,
+                   customer$Satisfaction_Score)
+
+barplot(age_table,
+        main = "Customer Satisfaction by Age Group",
+        xlab = "Age Group",
+        ylab = "Number of Customers",
+        col = rainbow(ncol(age_table)),
+        legend.text = TRUE)
+install.packages("wordcloud")
+library(wordcloud)
+
+feedback <- c(
+  "Excellent service",
+  "Very happy",
+  "Good quality",
+  "Fast delivery",
+  "Excellent support",
+  "Happy customer",
+  "Great experience",
+  "Satisfied",
+  "Excellent product",
+  "Amazing service"
+)
+
+text <- paste(feedback, collapse = " ")
+
+wordcloud(words = strsplit(text, " ")[[1]],
+          random.order = FALSE,
+          colors = rainbow(8))
